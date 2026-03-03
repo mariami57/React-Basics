@@ -11,13 +11,18 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      const productCost = 10 + 2 * 8;
+      const shippingCost = 5;
+      const totalCost = productCost + shippingCost;
       const div = (
         <div> 
-          <p>Cotton socks</p>
-          <p>Price: $10</p>
-          <button>Add to cart</button>
+          <p>Product cost: ${productCost}</p>
+          <p>Shipping cost: ${shippingCost}</p>
+          <p>Total cost: ${totalCost}</p>
+          <button>Place your order</button>
+          
         </div>
-           
+        
       )  
       
       const container = document.querySelector('.js-container');
@@ -25,3 +30,4 @@
     </script>
   </body>
 </html
+
