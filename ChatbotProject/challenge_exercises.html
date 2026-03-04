@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+      function ProductDetails({product}){
+        return (
+          <div>
+            { product === "Cotton socks" && (
+              <>
+                <p>Cotton socks</p>
+                <p>Price: $10.90</p>
+              </>
+            )}
+            { product === "Tennis balls" && (
+              <>
+                <p>Tennis balls</p>
+                <p>Price: $6.00</p> 
+              </>  
+            )}
+            { product === "Plain T-Shirt" && (
+              <>
+                <p>Plain T-Shirt</p>
+                <p>Price: $7.99</p>
+              </> 
+            )}
+          </div>
+
+        );
+      }
+
+      function App () {
+        return (
+           <>
+            <ProductDetails product="Cotton socks" />
+            <button>Add to Cart</button>
+
+            <ProductDetails product="Tennis balls" />
+            <button>Add to Cart</button>
+
+            <ProductDetails product="Plain T-Shirt"/>
+            <button>Add to Cart</button>
+           </>
+        );
+      }
+      
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>
