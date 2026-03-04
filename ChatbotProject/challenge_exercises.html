@@ -11,6 +11,7 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
+      /*
       function ProductDetails({product}){
         return (
           <div>
@@ -49,6 +50,47 @@
             <ProductDetails product="Plain T-Shirt"/>
             <button>Add to Cart</button>
            </>
+        );
+      }
+      */  
+
+      function ProductDetails({product, price, discountPrice }) {
+        return (
+          <>
+            <p>{product}</p>
+            { !discountPrice && (
+              <p>Price: ${price}</p>
+            )}
+
+            { discountPrice && (
+              <>
+                <p><del>Price: ${price}</del></p>
+                <p>Discount Price: ${discountPrice}</p>
+                
+              </>
+            )}
+            <button>Add to Cart</button>
+          </>
+        );
+      }
+
+      function App() {
+        return (
+          <>
+            <ProductDetails 
+              product="Cotton socks"
+              price="10.90"
+              discountPrice="5.45" 
+          />
+            <ProductDetails 
+              product="Tennis balls" 
+              price="6.00" 
+            />
+            <ProductDetails 
+              product="Plain T-Shirt" 
+              price="7.99" 
+            />
+          </>
         );
       }
       
