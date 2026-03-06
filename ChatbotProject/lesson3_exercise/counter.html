@@ -12,38 +12,38 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
       
-    function CounterComponent({ count, setCount }) {
-        
-        function buttonClick(){
-            setCount(count+1);  
-        }  
+    function Counter({ count, setCount }){
 
-        return (
-            <button onClick={buttonClick}>
-                Clicked {count} { count === 1 ? 'time' : 'times'}
-            </button> 
-        )
-    }  
+       function buttonClicks(){
+        setCount(count + 1);
+       }
 
-    function App () {
-        const [count, setCount] = React.useState(0);
+       return (
+            <button onClick={buttonClicks}>Clicked {count} {count === 1 ? 'time' : 'times'}</button>
+            
+       )
 
-        function resetCount(){
-            setCount(0);
-        }
+    }
+
+    function App() {
+       const [count, setCount] = React.useState(0);
+
+       function resetCount() {
+        setCount(0);
+       }
 
         return (
             <>
-                <CounterComponent 
+                <Counter
                     count={count}
                     setCount={setCount}
                 />
-                <CounterComponent 
+                <Counter
                     count={count}
                     setCount={setCount}
                 />
                 <button onClick={resetCount}>Reset</button>
-            </>
+            </>  
             
         );
     }

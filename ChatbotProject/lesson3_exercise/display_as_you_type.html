@@ -16,29 +16,29 @@
     function App () {
         const [inputText, setInputText] = React.useState('');
 
-        function saveTextInput() {
+        function saveInputText(event){
             setInputText(event.target.value);
-
         }
 
-        function resetInput(){
-            setInputText('');
+        function removeInputText(){
+            setInputText('')
         }
 
-
-        function setExampleInput(){
-            setInputText('Alice');
+        function setExampleInputText(){
+            setInputText('Alice')
         }
+
+        
 
         return (
             <>
                 <input 
-                    onChange={saveTextInput}
-                    placeholder="Type a name here"
-                    value={inputText}
-                 />
-                <button onClick={resetInput}>Reset</button>
-                <button onClick={setExampleInput}>Example</button>
+                    onChange={saveInputText}
+                    
+                    
+                />
+                <button onClick={removeInputText}>Reset</button>
+                <button onClick={setExampleInputText}>Example</button>
                 <p>Hello {inputText}</p>
             </>
             
