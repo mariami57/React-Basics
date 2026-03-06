@@ -2,6 +2,31 @@
 <html>
   <head>
     <title>React Basics</title>
+    <style>
+        body {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .button {
+            background-color: rgb(25,135,84);
+            color: white;
+            padding: 10px 15px;
+            border:none;
+            cursor: pointer;
+            
+        }
+
+        .button-container {
+            display: flex;
+            gap:10px;
+            height:100vh;
+            background-color: rgb(222, 222, 222);
+            justify-content: center;
+            align-items: center;
+            
+        }
+    </style>
   </head>
   <body>
     <div class="js-container"></div>
@@ -34,19 +59,23 @@
         }
 
         return (
-          <>  
-            <button onClick={increaseCount} ref={buttonRef}>
+          <div className="button-container">  
+            <button onClick={increaseCount} 
+                ref={buttonRef}
+                className="button"
+            >
                 Clicked {count} {count === 1 ? 'time' : 'times'}
             </button>
-            <button onClick={resetCounter}>
+            <button onClick={resetCounter} className="button">
                 Reset
             </button>
             <button 
                 onClick={autoClick}
+                className="button"
             >
                 Auto Click
             </button>
-          </>
+          </div>
         );
       }
 
