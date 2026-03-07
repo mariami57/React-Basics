@@ -9,6 +9,17 @@
   cursor: pointer;
 }
 
+.clear-button {
+  background-color: rgb(230, 230, 230);
+  padding: 12px 20px;
+  margin-left:10px;
+  border:none;
+  border-radius: 10px;
+  font-size:15px;
+  cursor: pointer;
+}
+
+
 .chat-input{
   padding: 12px 15px;
   border-radius:10px;
@@ -22,4 +33,10 @@
   display: flex;
   margin-bottom: 60px;
 
+}
+
+.time-message {
+  font-size: 14px;
+  color: rgb(125, 125, 125);
+  margin-top: 5px;
 }
