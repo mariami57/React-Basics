@@ -7,6 +7,8 @@ import CartIcon from '../../assets/images/cart-favicon.png';
 import './CheckoutPage.css';
 
 export function CheckoutPage({ cart, loadCart }) {
+    window.axios = axios;
+    
     const [deliveryOptions, setDeliveryOptions] = useState([]);
     const [paymentSummary, setPaymentSummary] = useState(null);
 
