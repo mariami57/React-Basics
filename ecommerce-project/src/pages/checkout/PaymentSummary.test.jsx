@@ -1,8 +1,8 @@
 import { it, expect, describe, vi, beforeEach } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router';
-// import axios from 'axios';
+import { MemoryRouter, useLocation } from 'react-router';
+import axios from 'axios';
 import { PaymentSummary } from './PaymentSummary';
 
 vi.mock('axios');
@@ -10,7 +10,7 @@ vi.mock('axios');
 describe('PaymentSummary component', () => {
     let paymentSummary;
     let loadCart;
-    // let user;
+    let user;
 
     beforeEach(() => {
         paymentSummary = {
@@ -23,10 +23,11 @@ describe('PaymentSummary component', () => {
         }
 
         loadCart = vi.fn();
-        // user = userEvent.setup();
+        user = userEvent.setup();
     });
 
-    it('displays the correct dollar amount', async () => {
+    it('displays the correct dollar amount', () => {
+
         render(
             <MemoryRouter>
                 <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
@@ -38,6 +39,8 @@ describe('PaymentSummary component', () => {
         const totalBeforeTax = screen.getByTestId('payment-total-before-tax');
         const tax = screen.getByTestId('payment-summary-tax');
         const total = screen.getByTestId('payment-summary-total');
+
+
 
         expect(
             screen.getByText('Items (3):')
@@ -62,6 +65,35 @@ describe('PaymentSummary component', () => {
         expect(
             total
         ).toHaveTextContent('$52.51')
+
+
+    });
+
+    it('places an order', async () => {
+        function Location() {
+            const location = useLocation();
+            return (
+                <div data-testid="url-path">
+                    {location.pathname}
+                </div>
+            )
+
+        }
+        render(
+            <MemoryRouter>
+                <PaymentSummary paymentSummary={paymentSummary} loadCart={loadCart} />
+                <Location />
+            </MemoryRouter>
+        );
+
+        const button = screen.getByTestId('place-order-button');
+        await user.click(button);
+
+        expect(axios.post).toHaveBeenCalledWith('/api/orders');
+
+        expect(loadCart).toHaveBeenCalled();
+
+        expect(screen.getByTestId('url-path')).toHaveTextContent('/orders');
 
 
     })
