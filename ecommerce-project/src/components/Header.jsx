@@ -33,29 +33,36 @@ export function Header({ cart }) {
             <div className="left-section">
                 <NavLink to="/" className="header-link">
                     <img className="logo"
-                          src={CheckmarkWhite} />
+                          src={CheckmarkWhite}
+                          data-testid="logo" />
                     <img className="mobile-logo"
-                          src={CheckmarkWhite} /> 
+                          src={CheckmarkWhite} 
+                          data-testid="mobile-logo"/> 
                 </NavLink>
             </div>
 
             <div className="middle-section">
                 <input className="search-bar" type="text" placeholder="Search" 
-                 value={search} onChange={updateSearchInput}/>
+                 value={search} onChange={updateSearchInput}
+                 data-testid="search-bar"/>
 
-                <button className="search-button" onClick={findSearch}>
-                    <img className="search-icon" src={SearchIcon} />
+                <button className="search-button" onClick={findSearch}
+                    data-testid="search-button">
+                    <img className="search-icon" src={SearchIcon} 
+                        data-testid="search-icon"/>
                 </button>
             </div>
 
             <div className="right-section">
-                <NavLink className="orders-link header-link" to="/orders">
+                <NavLink className="orders-link header-link" to="/orders"
+                    data-testid="orders-link">
 
                     <span className="orders-text">Orders</span>
                 </NavLink>
 
-                <NavLink className="cart-link header-link" to="/checkout">
-                    <img className="cart-icon" src={CartIcon} />
+                <NavLink className="cart-link header-link" to="/checkout"
+                    data-testid="cart-link">
+                    <img className="cart-icon" src={CartIcon} data-testid="cart-icon"/>
                     <div className="cart-quantity">{totalQuantity}</div>
                     <div className="cart-text">Cart</div>
                 </NavLink>
