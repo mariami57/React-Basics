@@ -89,7 +89,7 @@ describe('OrderSummary component', () => {
         ).toHaveTextContent('$10.90');
 
         expect(
-            within (cartItemContainers[0]).getByTestId('cart-item-quantity')
+            within(cartItemContainers[0]).getByTestId('cart-item-quantity')
         ).toHaveTextContent('Quantity: 2');
 
         let deliveryOptionInputs = within(cartItemContainers[0]).getAllByTestId('delivery-option-input');
@@ -100,12 +100,12 @@ describe('OrderSummary component', () => {
 
         expect(
             within(cartItemContainers[1]).getByTestId('cart-item-image')
-            
+
         ).toHaveAttribute('src', 'images/products/intermediate-composite-basketball.jpg');
 
         expect(
             within(cartItemContainers[1]).getByTestId('cart-item-name')
-            
+
         ).toHaveTextContent('Intermediate Size Basketball');
 
         expect(
@@ -117,13 +117,58 @@ describe('OrderSummary component', () => {
         ).toHaveTextContent('Quantity: 1');
 
         let deliveryOptionInputs2 = within(cartItemContainers[1])
-        .getAllByTestId('delivery-option-input');
+            .getAllByTestId('delivery-option-input');
         expect(deliveryOptionInputs2.length).toBe(3);
         expect(deliveryOptionInputs2[0].checked).toBe(false);
         expect(deliveryOptionInputs2[1].checked).toBe(true);
         expect(deliveryOptionInputs2[2].checked).toBe(false);
 
-    })
+    });
+
+    it('deletes a cart item', async () => {
+        render(
+            <MemoryRouter>
+                <OrderSummary deliveryOptions={deliveryOptions} cart={cart} loadCart={loadCart} />
+            </MemoryRouter>
+        );
+
+        const cartItemContainers = screen.getAllByTestId('cart-item-container');
+        expect(cartItemContainers.length).toBe(2);
+
+        await user.click(
+            within(cartItemContainers[0]).getByTestId('cart-item-delete-quantity-link')
+        );
+
+        expect(axios.delete).toHaveBeenCalledWith(
+            '/api/cart-items/e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
+
+        );
+
+        expect(loadCart).toHaveBeenCalledTimes(1);
+
+        await user.click(
+            within(cartItemContainers[1]).getByTestId('cart-item-delete-quantity-link')
+        );
+
+        expect(axios.delete).toHaveBeenCalledWith(
+            '/api/cart-items/15b6fc6f-327a-4ec4-896f-486349e85a3d',
+        );
+
+        expect(loadCart).toHaveBeenCalledTimes(2);
+    });
+
+    it('does not render anything if cart is empty', () => {
+        render(
+            <MemoryRouter>
+                <OrderSummary deliveryOptions={deliveryOptions} cart={[]} loadCart={loadCart} />
+            </MemoryRouter>
+
+        );
+
+        expect(
+            screen.queryAllByTestId('cart-item-container').length
+        ).toBe(0);
+    });
 
 
 })

@@ -73,7 +73,7 @@ export function CartItemDetails({ cartItem, loadCart }) {
                         Update
                     </span>
                     <span className="delete-quantity-link link-primary"
-                        data-testid="cart-item=delete-quantity-link"
+                        data-testid="cart-item-delete-quantity-link"
                         onClick={deleteCartItem}>
                         Delete
                     </span>
